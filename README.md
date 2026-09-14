@@ -12,11 +12,11 @@
 
 ### 实物整体
 
-![BMS demo full view](docs/images/bms-demo-full.jpg)
+![BMS demo full view](bms-demo-full.jpg)
 
 ### OLED 显示结果
 
-![OLED result](docs/images/oled-result.jpg)
+![OLED result](oled-result.jpg)
 
 当前显示结果：
 
@@ -62,7 +62,7 @@ SOC 为 0% 是因为当前测试电池电压较低。给电池充电到 3.7V 以
 
 接线示意：
 
-![Wiring diagram](docs/images/wiring-diagram.png)
+![Wiring diagram](wiring-diagram.png)
 
 ## 软件功能
 
@@ -80,19 +80,13 @@ SOC 为 0% 是因为当前测试电池电压较低。给电池充电到 3.7V 以
 
 ## 核心代码
 
-主程序位于：
+完整代码和 Keil 工程位于：
 
 ```text
-src/User/main.c
+stm32-bms-demo-source.zip
 ```
 
-完整 Keil 工程位于：
-
-```text
-keil/Project.uvprojx
-```
-
-如果需要复现实验，可以直接用 Keil 打开 `keil/Project.uvprojx`，编译后下载到 STM32F103C8T6。
+下载并解压后，可以用 Keil 打开工程文件，编译后下载到 STM32F103C8T6。
 
 核心计算：
 
@@ -125,3 +119,16 @@ return 0;
 - 使用电阻分压解决 ADC 输入电压限制问题。
 - 用 OLED 做实时显示，便于现场展示。
 - 项目可以继续扩展温度采样、继电器保护、多串电芯采样、CAN 通信和均衡控制。
+
+## 面试说明
+
+可以这样介绍：
+
+```text
+我做了一个基于 STM32F103 的单节锂电池 BMS 原型。
+硬件上使用两个 10k 电阻对电池电压分压，PA0 读取 ADC 采样值。
+软件上将 ADC 值还原成真实电池电压，并用 OCV-SOC 查表法估算电量。
+OLED 会实时显示电压、SOC 和状态。
+当前电池电压是 3.32V，所以 SOC 接近 0%，系统状态为 OK。
+后续可以扩展到多串电芯采样、温度管理、继电器保护和 CAN 通信。
+```
